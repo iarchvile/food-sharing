@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\ProductCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ProductCategoryController::class, 'index'])->name('index');
+
+Route::resource('category', '\App\Http\Controllers\ProductCategoryController');
+
+Route::resource('card', '\App\Http\Controllers\ProductCardController');

@@ -17,8 +17,10 @@ class CreateProductCardsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable(false);
             $table->unsignedBigInteger('products_category_id')->nullable(false);
-            $table->string('title', 255);
+            $table->string('title');
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('city_id')->nullable(false);
+            $table->string('address')->nullable();
             $table->string('geo_data')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -29,6 +31,12 @@ class CreateProductCardsTable extends Migration
                 ->references('id')
                 ->on('products_categories')
                 ->onDelete('cascade');
+        });
+
+        Schema::table('product_cards', function (Blueprint $table) {
+            $table->foreign('city_id')
+                ->references('id')
+                ->on('cities');
         });
     }
 

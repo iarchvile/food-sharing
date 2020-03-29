@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use \App\Models\Cities;
 use App\Models\ProductCard;
 use App\Models\ProductsCategory;
 use Faker\Generator as Faker;
@@ -12,5 +13,6 @@ $factory->define(ProductCard::class, function (Faker $faker) {
         'products_category_id' => $faker->randomElement(ProductsCategory::pluck('id')->toArray()),
         'title' => $faker->sentence(5, false),
         'description' => $faker->paragraph(),
+        'city_id' => $faker->randomElement(Cities::pluck('id')->toArray()),
     ];
 });

@@ -37,4 +37,9 @@ class ProductCard extends Model
     {
         return $this->hasOne(ProductsCategory::class, 'id', 'products_category_id');
     }
+
+    public function city()
+    {
+        return $this->hasOne(Cities::class, 'id', 'city_id');
+    }
 }

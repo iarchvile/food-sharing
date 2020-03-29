@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Cities::class, function (Faker $faker) {
     return [
-        'name' => $faker->city,
+        'name' => $faker->unique()->city,
     ];
 });

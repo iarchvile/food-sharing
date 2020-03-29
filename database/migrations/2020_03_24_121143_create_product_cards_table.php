@@ -19,9 +19,11 @@ class CreateProductCardsTable extends Migration
             $table->unsignedBigInteger('products_category_id')->nullable(false);
             $table->string('title');
             $table->text('description')->nullable();
+            $table->text('photos');
             $table->unsignedBigInteger('city_id')->nullable(false);
             $table->string('address')->nullable();
-            $table->string('geo_data')->nullable();
+            $table->float('latitude', 9, 6)->nullable(false);
+            $table->float('longitude', 9, 6)->nullable(false);
             $table->softDeletes();
             $table->timestamps();
         });

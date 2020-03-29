@@ -33,6 +33,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProductCard extends Model
 {
+
+    protected $casts = [
+        'photos' => 'array',
+        'created_at' => 'data',
+    ];
+
     public function category()
     {
         return $this->hasOne(ProductsCategory::class, 'id', 'products_category_id');

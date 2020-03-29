@@ -17,6 +17,7 @@ class CreateProductsCategoriesTable extends Migration
             $table->id();
             $table->string('title', 255);
             $table->text('description')->nullable();
+            $table->text('photo');
             $table->softDeletes();
             $table->timestamps();
         });

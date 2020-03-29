@@ -8,11 +8,22 @@ use App\Models\ProductsCategory;
 use Faker\Generator as Faker;
 
 $factory->define(ProductCard::class, function (Faker $faker) {
+    $faker = \Faker\Factory::create('ru_RU');
+
     return [
         'user_id' => $faker->randomNumber,
         'products_category_id' => $faker->randomElement(ProductsCategory::pluck('id')->toArray()),
         'title' => $faker->sentence(5, false),
         'description' => $faker->paragraph(),
+        'address' => $faker->address,
+        'latitude' => $faker->latitude(35, 55),
+        'longitude' => $faker->latitude(55, 60),
+        'photos' => [
+            'https://loremflickr.com/350/255/food/all?r='.$faker->unique()->randomNumber(),
+            'https://loremflickr.com/350/255/food/all?r='.$faker->unique()->randomNumber(),
+            'https://loremflickr.com/350/255/food/all?r='.$faker->unique()->randomNumber(),
+        ],
         'city_id' => $faker->randomElement(Cities::pluck('id')->toArray()),
+
     ];
 });

@@ -10,54 +10,79 @@
     @php
         $breadcrumbs = [
             [
-                'title'=>'New card'
+                'url'=>route('category.show', $card->category->id),
+                'title'=>$card->category->title
+            ],
+            [
+                'title'=>$card->title
             ]
         ];
     @endphp
 
+
     <div class="container">
 
-        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-            <h1 class="display-4">New card</h1>
-            <p class="lead">description</p>
+
+        <div class="py-3">
+            <x-breadcrumbs :breadcrumbs="$breadcrumbs"/>
         </div>
 
-        <x-breadcrumbs :breadcrumbs="$breadcrumbs"/>
-        <x-form-errors :errors="$errors"/>
+        <div class="card">
+            <div class="row">
+                <aside class="col-sm-4 border-right">
+                    <article class="gallery-wrap p-2">
+                        <div class="img-big-wrap">
+                            <img src="{{$card->photos[0]}}">
+                        </div>
+                        <hr>
+                        <div class="d-flex img-small-wrap">
+                            @foreach ($card->photos as $item)
+                                <div class="item-gallery p-1">
+                                    <img height="75" src="{{$item}}">
+                                </div>
+                            @endforeach
+                        </div>
 
-        {!! Form::model(new \App\Models\ProductCard(), ['route' => 'card.store', 'class'=>'bg-white border p-5']); !!}
+                        <hr>
 
-        <div class="form-group row">
-            <label for="title" class="col-sm-2 col-form-label">Title</label>
-            <div class="col-sm-10">
-                {!! Form::text('title', null, ['class'=>'form-control', 'id'=>'title']); !!}
+                        <div class="img-big-wrap">
+                            @php($coor = "{$card->latitude},{$card->longitude}")
+
+                            <img src="https://static-maps.yandex.ru/1.x/?ll={{$coor}}&size=350,250&z=12&l=map&pt={{$coor}},home" alt="">
+                        </div>
+
+
+                    </article>
+                </aside>
+                <aside class="col-sm-8">
+                    <article class="card-body p-5">
+                        <h3 class="title mb-3">{{ $card->title }}</h3>
+
+                        <p class="price-detail-wrap">
+                            <span class="price h3">
+                                0000
+                            </span>
+                        </p>
+                        <dl class="item-property">
+                            <dt>Description</dt>
+                            <dd><p>{{ $card->description }}</p></dd>
+                        </dl>
+
+
+                        <hr>
+
+                        <div class="text-right">
+                            <a href="#" @click.prevent="goEdit(data.id)" class="btn btn-primary">edit</a>
+                        </div>
+
+
+                    </article>
+                </aside>
             </div>
         </div>
 
-        <div class="form-group row">
-            <label for="title" class="col-sm-2 col-form-label">Category</label>
-            <div class="col-sm-10">
-                <div class="input-group mb-3">
-                    {!! Form::select('size', ['L' => 'Large', 'S' => 'Small'], null, ['class' => 'custom-select']); !!}
-                </div>
-            </div>
-        </div>
-
-        {{--<select class="custom-select" id="inputGroupSelect02">
-            <option selected>Choose...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>--}}
-
-        <div class="form-group row">
-            <div class="col-sm-10">
-                {!! Form::submit('Submit', ['class'=>'btn btn-primary']); !!}
-            </div>
-        </div>
-
-        {!! Form::close() !!}
 
     </div>
+
 
 @endsection

@@ -27,6 +27,49 @@ class EloquentProductsCardsRepository
 
     public function getById(int $id)
     {
-        return ProductCard::findOrFail($id);
+        return ProductCard::with('category', 'status')->findOrFail($id);
+    }
+
+    /**
+     * Получить все карточки продуктов
+     *
+     * @return ProductCard[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getAll()
+    {
+        return ProductCard::with('category', 'status')->get();
+    }
+
+    /**
+     * Получить карточки определенного статуса
+     *
+     * @param $statusId
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getCardsByStatus($statusId)
+    {
+        return ProductCard::where('status_id', $statusId)->with('category', 'status')->get();
+    }
+
+    /**
+     * Получить карточки на которые поступили жалобы
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getComplaintCards()
+    {
+        return ProductCard::where('is_сomplaint', 1)->with('category', 'status')->get();
+    }
+
+    /**
+     * Редактирование карточки продуктов
+     *
+     * @param ProductCard $card
+     * @param $data
+     */
+    public function update(ProductCard $card, $data)
+    {
+
+        $card->update($data);
     }
 }

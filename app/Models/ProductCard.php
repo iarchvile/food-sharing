@@ -33,8 +33,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProductCard extends Model
 {
+    protected $guarded = [];
+
     public function category()
     {
         return $this->hasOne(ProductsCategory::class, 'id', 'products_category_id');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function status()
+    {
+        return $this->hasOne(ProductCardStatus::class, 'id', 'status_id');
     }
 }

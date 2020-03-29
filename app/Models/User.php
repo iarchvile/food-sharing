@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\UserRole', 'id', 'user_roles_id');
     }
+
+    public function productCard()
+    {
+        return $this->belongsTo('App\Models\ProductCard', 'user_id', 'id');
+    }
 }

@@ -15,7 +15,7 @@ class AddIsсomplaintToProductCards extends Migration
     public function up()
     {
         Schema::table('product_cards', function (Blueprint $table) {
-            $table->integer('is_сomplaint')->default(0)->after('geo_data')->comment('Жалоба (0 - нет, 1 - есть)');
+            $table->integer('is_сomplaint')->default(0)->comment('Жалоба (0 - нет, 1 - есть)');
         });
     }
 

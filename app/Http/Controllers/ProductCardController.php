@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Requests\StoreProductCardRequest;
 use App\Models\ProductCard;
+use App\Models\ProductsCategory;
 use App\Services\ProductsCards\ProductsCardsService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -10,46 +12,32 @@ use Illuminate\View\View;
 
 class ProductCardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
+    public function create(ProductsCategory $productsCategory)
     {
-        //
+        \View::share([
+            'categories' => $productsCategory::all(['id', 'title'])->
+            pluck('title', 'id')->toArray(),
+        ]);
+
+        return view('pages.card-detail');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     *
-     * @return Response
-     */
-    public function store(Request $request)
+    public function store(StoreProductCardRequest $request)
     {
-        //
+        $data = $request->getFormData();
+        dd($data);
+
+        $this->citiesService->createCity($data);
+
+        return redirect(route('cms.cities.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  ProductsCardsService  $productsCardsService
-     * @param $card
-     *
-     * @return \Illuminate\Contracts\View\Factory|View
-     */
     public function show(ProductsCardsService $productsCardsService, $card)
     {
         \View::share([

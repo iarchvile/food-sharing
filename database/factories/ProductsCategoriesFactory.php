@@ -9,5 +9,6 @@ $factory->define(ProductsCategory::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(3, false),
         'description' => $faker->paragraph(),
+        'photo' => 'https://loremflickr.com/350/225/food/all?r='.$faker->unique()->randomNumber(),
     ];
 });

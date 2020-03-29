@@ -19,3 +19,5 @@ Route::get('/', [ProductCategoryController::class, 'index'])->name('index');
 Route::resource('category', '\App\Http\Controllers\ProductCategoryController');
 
 Route::resource('card', '\App\Http\Controllers\ProductCardController');
+
+Route::get('/map', [ProductCategoryController::class, 'map']);

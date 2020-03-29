@@ -12,7 +12,7 @@ $factory->define(ProductCard::class, function (Faker $faker) {
 
     return [
         'user_id' => $faker->randomNumber,
-        'products_category_id' => $faker->randomElement(ProductsCategory::pluck('id')->toArray()),
+        'products_category_id' =>ProductsCategory::pluck('id')->random(),
         'title' => $faker->sentence(5, false),
         'description' => $faker->paragraph(),
         'address' => $faker->address,
@@ -23,7 +23,7 @@ $factory->define(ProductCard::class, function (Faker $faker) {
             'https://loremflickr.com/350/255/food/all?r='.$faker->unique()->randomNumber(),
             'https://loremflickr.com/350/255/food/all?r='.$faker->unique()->randomNumber(),
         ],
-        'city_id' => $faker->randomElement(Cities::pluck('id')->toArray()),
+        'city_id' => Cities::pluck('id')->random(),
 
     ];
 });

@@ -31,3 +31,9 @@ Route::prefix('admin')->middleware('isAdministrator')->group(function () {
     Route::get('{card}/edit', '\App\Http\Controllers\Admin\ProductCardController@edit')->name('admin.productCard.edit');
     Route::put('{card}/update', '\App\Http\Controllers\Admin\ProductCardController@update')->name('admin.productCard.update');
 });
+
+Route::prefix('user')->middleware('isAdministrator')->group(function () {
+    Route::get('/', '\App\Http\Controllers\Admin\UserController@index')->name('admin.user');
+    Route::get('{user}/edit', '\App\Http\Controllers\Admin\UserController@edit')->name('admin.user.edit');
+    Route::put('{user}/update', '\App\Http\Controllers\Admin\UserController@update')->name('admin.user.update');
+});

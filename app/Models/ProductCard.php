@@ -30,6 +30,23 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductCard whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductCard whereUserId($value)
  * @mixin \Eloquent
+ * @property array $photos
+ * @property int $city_id
+ * @property string|null $address
+ * @property float $latitude
+ * @property float $longitude
+ * @property int $is_сomplaint Жалоба (0 - нет, 1 - есть)
+ * @property int $status_id Статус
+ * @property-read \App\Models\Cities $city
+ * @property-read \App\Models\ProductCardStatus $status
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductCard whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductCard whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductCard whereIsсomplaint($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductCard whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductCard whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductCard wherePhotos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductCard whereStatusId($value)
  */
 class ProductCard extends Model
 {

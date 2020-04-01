@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Requests;
 use App\Http\Requests\FormRequest;
 use App\Services\Geocode\GeocodeService;
 
-class StoreProductCardRequest extends FormRequest
+class UpdateProductCardRequest extends FormRequest
 {
+
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -35,25 +37,27 @@ class StoreProductCardRequest extends FormRequest
         ];
     }
 
-    public function withValidator($validator)
+    public function getFormData()
+    {
+        $data = parent::getFormData();
+
+        $data['photos'] = collect($data['photos'])->filter()->all();
+
+        $geocode_service = resolve(GeocodeService::class);
+
+        if ($point = $geocode_service->getPoint($data['address'])) {
+            $data['latitude'] = $point[0];
+            $data['longitude'] = $point[1];
+        }
+
+        return $data;
+    }
+
+    protected function prepareForValidation()
     {
         $this->merge([
-            'user_id' => \Auth::user()->id,
+            'photos' => collect($this->photos)->filter()->all(),
         ]);
-
-        $validator->after(function ($validator) {
-            $geocode_service = resolve(GeocodeService::class);
-            $point = $geocode_service->getPoint($this->address);
-
-            if (!is_null($point)) {
-                $this->merge([
-                    'latitude' => $point[0],
-                    'longitude' => $point[1],
-                ]);
-            } else {
-                $validator->errors()->add('field', 'Address is wrong!');
-            }
-        });
     }
 
 }

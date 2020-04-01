@@ -7,7 +7,9 @@ use App\Models\UserRole;
 use App\Enums\UserRoleEnum;
 use App\Services\Users\UsersService;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -27,7 +29,7 @@ class UserController extends Controller
     /**
      * Получить список пользователей
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -40,7 +42,8 @@ class UserController extends Controller
      * Получить пользователя
      *
      * @param User $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * @return Factory|View
      */
     public function edit(User $user)
     {

@@ -10,10 +10,9 @@ class FormRequest extends BaseFormRequest
 
     public function getFormData()
     {
-        $data = $this->request->all();
-
-        $data = Arr::except($data, [
+        $data = $this->except([
             '_token',
+            '_method',
         ]);
 
         return $data;

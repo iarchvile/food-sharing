@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\Geocode\GeocodeService;
+use App\Services\Geocode\Repositories\GeocodeInterface;
+use App\Services\Geocode\Repositories\YandexMapRepository;
 use App\Services\ProductsCards\Repositories\EloquentProductsCardsRepository;
 use App\Services\ProductsCategories\Repositories\ProductsCategoriesInterface;
 use App\Services\ProductsCategories\Repositories\EloquentProductsCategoriesRepository;
@@ -37,5 +40,7 @@ class AppServiceProvider extends ServiceProvider
             EloquentProductsCategoriesRepository::class);
         $this->app->bind(ProductsCategoriesInterface::class,
             EloquentProductsCardsRepository::class);
+        $this->app->bind(GeocodeInterface::class,
+            YandexMapRepository::class);
     }
 }

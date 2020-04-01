@@ -45,6 +45,7 @@ class ProductsCardsService
      * Получить карточки определенного статуса
      *
      * @param $statusId
+     *
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
     public function getCardsByStatus($statusId)
@@ -71,5 +72,15 @@ class ProductsCardsService
     public function update($card, $data)
     {
         $this->productsCardsRepository->update($card, $data);
+    }
+
+    /**
+     * @param $data
+     *
+     * @return int|mixed
+     */
+    public function create($data)
+    {
+        return $this->productsCardsRepository->createFormArray($data);
     }
 }

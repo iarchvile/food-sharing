@@ -4,6 +4,8 @@
 namespace App\Services\Users;
 
 use App\Services\Users\Repositories\UsersRepository;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class UsersService
 {
@@ -23,7 +25,7 @@ class UsersService
     /**
      * Получить список пользователей
      *
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @return Builder[]|Collection
      */
     public function getAll()
     {
@@ -50,5 +52,15 @@ class UsersService
     public function setUserRole($user, $roleId)
     {
         $this->usersRepository->setUserRole($user, $roleId);
+    }
+
+    /**
+     * @param $user
+     *
+     * @return mixed
+     */
+    public function getUserCards($user)
+    {
+        return $this->usersRepository->getUserCards($user);
     }
 }

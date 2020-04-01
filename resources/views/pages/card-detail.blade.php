@@ -32,7 +32,7 @@
                 <aside class="col-sm-4 border-right">
                     <article class="gallery-wrap p-2">
                         <div class="img-big-wrap">
-                            <img src="{{$card->photos[0]}}">
+                            <img style="max-width: 100%;" src="{{$card->photos[0]}}">
                         </div>
                         <hr>
                         <div class="d-flex img-small-wrap">
@@ -67,13 +67,6 @@
                             <dt>Description</dt>
                             <dd><p>{{ $card->description }}</p></dd>
                         </dl>
-
-
-                        <hr>
-
-                        <div class="text-right">
-                            <a href="#" @click.prevent="goEdit(data.id)" class="btn btn-primary">edit</a>
-                        </div>
 
 
                     </article>

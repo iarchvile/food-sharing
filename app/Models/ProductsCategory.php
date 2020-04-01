@@ -23,6 +23,8 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductsCategory whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductsCategory whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $photo
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductsCategory wherePhoto($value)
  */
 class ProductsCategory extends BaseModel
 {

@@ -69,7 +69,16 @@ class EloquentProductsCardsRepository
      */
     public function update(ProductCard $card, $data)
     {
-
         $card->update($data);
+    }
+
+    /**
+     * @param $data
+     *
+     * @return int|mixed
+     */
+    public function createFormArray($data)
+    {
+        return (new ProductCard())->create($data)->id;
     }
 }

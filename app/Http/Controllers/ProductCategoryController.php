@@ -13,12 +13,6 @@ use Illuminate\View\View;
 
 class ProductCategoryController extends Controller
 {
-    public function map()
-    {
-        $response = \Http::get('https://geocode-maps.yandex.ru/1.x/?apikey=a93a2446-e322-4019-86e0-9174ab05df35&format=json&geocode=Люберцы');
-
-        return $response->json();
-    }
 
     public function index(ProductsCategoriesService $productCategoryService)
     {

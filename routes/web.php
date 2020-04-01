@@ -17,23 +17,25 @@ Auth::routes();
 
 Route::get('/', [ProductCategoryController::class, 'index'])->name('index');
 
-Route::resource('category', '\App\Http\Controllers\ProductCategoryController');
+Route::resource('category', 'ProductCategoryController');
 
-Route::resource('card', '\App\Http\Controllers\ProductCardController');
+Route::resource('card', 'ProductCardController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->middleware('isAdministrator')->group(function () {
-    Route::get('/', '\App\Http\Controllers\Admin\ProductCardController@index')->name('admin');
-    Route::get('new', '\App\Http\Controllers\Admin\ProductCardController@getNewCards')->name('admin.productCard.new');
-    Route::get('complaint', '\App\Http\Controllers\Admin\ProductCardController@getComplaintCards')->name('admin.productCard.complaint');
-    Route::get('cardsCount', '\App\Http\Controllers\Admin\ProductCardController@getCardsCount')->name('admin.cardsCount');
-    Route::get('{card}/edit', '\App\Http\Controllers\Admin\ProductCardController@edit')->name('admin.productCard.edit');
-    Route::put('{card}/update', '\App\Http\Controllers\Admin\ProductCardController@update')->name('admin.productCard.update');
+    Route::get('/', 'Admin\ProductCardController@index')->name('admin');
+    Route::get('new', 'Admin\ProductCardController@getNewCards')->name('admin.productCard.new');
+    Route::get('complaint', 'Admin\ProductCardController@getComplaintCards')->name('admin.productCard.complaint');
+    Route::get('cardsCount', 'Admin\ProductCardController@getCardsCount')->name('admin.cardsCount');
+    Route::get('{card}/edit', 'Admin\ProductCardController@edit')->name('admin.productCard.edit');
+    Route::put('{card}/update', 'Admin\ProductCardController@update')->name('admin.productCard.update');
 });
 
 Route::prefix('user')->middleware('isAdministrator')->group(function () {
-    Route::get('/', '\App\Http\Controllers\Admin\UserController@index')->name('admin.user');
-    Route::get('{user}/edit', '\App\Http\Controllers\Admin\UserController@edit')->name('admin.user.edit');
-    Route::put('{user}/update', '\App\Http\Controllers\Admin\UserController@update')->name('admin.user.update');
+    Route::get('/', 'Admin\UserController@index')->name('admin.user');
+    Route::get('{user}/edit', 'Admin\UserController@edit')->name('admin.user.edit');
+    Route::put('{user}/update', 'Admin\UserController@update')->name('admin.user.update');
 });
+
+Route::resource('my', 'User\UserController')->middleware('auth');

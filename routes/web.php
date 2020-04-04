@@ -18,7 +18,6 @@ Auth::routes();
 Route::get('/', [ProductCategoryController::class, 'index'])->name('index');
 
 Route::resource('category', 'ProductCategoryController');
-
 Route::resource('card', 'ProductCardController');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -39,3 +38,6 @@ Route::prefix('user')->middleware('isAdministrator')->group(function () {
 });
 
 Route::resource('my', 'User\UserController')->middleware('auth');
+
+Route::get('settings/edit', 'User\UserSettingsController@edit')->name('user.settings.edit');
+Route::put('settings/update', 'User\UserSettingsController@update')->name('user.settings.update');

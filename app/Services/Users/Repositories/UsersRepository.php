@@ -33,6 +33,17 @@ class UsersRepository
     }
 
     /**
+     * Найти пользователя по номеру телефона
+     *
+     * @param $phone
+     * @return Builder|Model|object|null
+     */
+    public function getUserByPhone($phone)
+    {
+        return User::where('phone', $phone)->first();
+    }
+
+    /**
      * Задать роль пользователю
      *
      * @param $user User
@@ -52,5 +63,15 @@ class UsersRepository
     public function getUserCards($user)
     {
         return $user->productCard()->paginate();
+    }
+
+    /**
+     * Редактирование пользователя
+     *
+     * @param $user
+     */
+    public function update(User $user)
+    {
+        $user->save();
     }
 }

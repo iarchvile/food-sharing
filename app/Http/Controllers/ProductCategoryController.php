@@ -13,11 +13,16 @@ use Illuminate\View\View;
 
 class ProductCategoryController extends Controller
 {
+    const INDEX_PAGE_LIMIT_PRODUCT_CARD_NEAR = 15; //кол-во карточек на главной странице в разделе "Рядом с Вами"
 
-    public function index(ProductsCategoriesService $productCategoryService)
+    public function index(
+        ProductsCategoriesService $productCategoryService,
+        ProductsCardsService $productsCardsService
+    )
     {
         \View::share([
             'categories' => $productCategoryService->getAll($productCategoryService::INDEX_PAGE_LIMIT_CATEGORIES),
+            'cards' => $productsCardsService->getNear(self::INDEX_PAGE_LIMIT_PRODUCT_CARD_NEAR),
         ]);
 
         return view('pages.index');

@@ -3,8 +3,9 @@
 
 namespace App\Services\ProductsCards;
 
-
 use App\Services\ProductsCards\Repositories\EloquentProductsCardsRepository;
+use App\Helpers\GetDistanceBetweenPoints;
+use App\Enums\ProductCardStatusEnum;
 
 class ProductsCardsService
 {
@@ -16,7 +17,15 @@ class ProductsCardsService
      */
     private $productsCardsRepository;
 
-    public function __construct(EloquentProductsCardsRepository $productsCardsRepository)
+    /**
+     * @var $getDistanceBetweenPointsHandler;
+     */
+    private $getDistanceBetweenPointsHandler;
+
+    public function __construct
+    (
+        EloquentProductsCardsRepository $productsCardsRepository
+    )
     {
         $this->productsCardsRepository = $productsCardsRepository;
     }
@@ -61,6 +70,50 @@ class ProductsCardsService
     public function getComplaintCards()
     {
         return $this->productsCardsRepository->getComplaintCards();
+    }
+
+    /**
+     * Получить все карточки рядом с пользователем
+     * (если пользователя нет или координаты не заданы - вернуть пустой массив)
+     *
+     * @param $perPage
+     * @return array
+     */
+    public function getNear(int $perPage) : array
+    {
+        $response = [];
+        $user = \Auth::user();
+        if(is_null($user)){
+            return $response;
+        }
+        if(is_null($user->latitude) || is_null($user->longitude)){
+            return $response;
+        }
+
+        $productCards = $this->getCardsByStatus(ProductCardStatusEnum::ACTIVE)->toArray();
+
+        foreach ($productCards as $key => $productCard){
+            $productCards[$key]['distance'] = GetDistanceBetweenPoints::getDistanceBetweenPoints($user->latitude, $user->longitude, $productCard['latitude'], $productCard['longitude']);
+        }
+
+        usort($productCards, function ($a, $b) {
+            if ($a['distance'] > $b['distance']) {
+                return 1;
+            }
+
+            if ($a['distance'] < $b['distance']) {
+                return -1;
+            }
+
+            if ($a['distance'] == $b['distance']) {
+                if ($a['created_at'] == $b['created_at']) return 0;
+                return ($a['created_at'] > $b['created_at']) ? -1 : 1;
+            }
+        });
+
+        $response = array_slice($productCards, 0, $perPage);
+
+        return $response;
     }
 
     /**

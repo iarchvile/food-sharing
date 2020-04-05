@@ -27,7 +27,13 @@
             <x-breadcrumbs :breadcrumbs="$breadcrumbs"/>
         </div>
 
+
         <div class="card">
+
+            @if(Session::has('message'))
+                <p class="alert text-center {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+            @endif
+
             <div class="row">
                 <aside class="col-sm-4 border-right">
                     <article class="gallery-wrap p-2">
@@ -57,19 +63,19 @@
                 <aside class="col-sm-8">
                     <article class="card-body p-5">
                         <h3 class="title mb-3">{{ $card->title }}</h3>
-
-                        <p class="price-detail-wrap">
-                            <span class="price h3">
-                                0000
-                            </span>
-                        </p>
                         <dl class="item-property">
                             <dt>Description</dt>
                             <dd><p>{{ $card->description }}</p></dd>
                         </dl>
 
                         @if(!Route::is('my.show'))
+                            {!! Form::open([
+                                'url'=>route('card.complaint', ['card' => $card->id]),
+                                'method'=>'put'
+                            ]) !!}
+
                             <button id="complaint" type="submit" class="btn btn-primary" card-id="{{$card->id}}">Пожаловаться</button>
+                            {!! Form::close() !!}
                         @endif
                     </article>
                 </aside>

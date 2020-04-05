@@ -51,15 +51,15 @@
             </div>
         </div>
 
-        <div>
+        <div class="form-row">
             @for($i=0;$i<count($card->photos);$i++)
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="photo-{{$i+1}}">Photo-{{$i+1}}</label><br>
+                        <label for="photo-{{$i+1}}">Выбрать фото {{$i+1}}</label><br>
                         <div style="margin-bottom: 10px">
                             <img width="100px" height="100px" src="{{$card->photos[$i]}}">
                         </div>
-                        <input type="file" name="photos[]" class="form-control" id="photo-{{$i+1}}" value="{{$card->photos[$i]??''}}">
+                        <input style="display: none" type="file" name="photos[]" id="photo-{{$i+1}}" value="{{$card->photos[$i]??''}}">
                     </div>
                 </div>
             @endfor

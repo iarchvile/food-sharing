@@ -48,7 +48,7 @@ class ProductCardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  ProductCard  $productCard
+     * @param ProductCard $productCard
      *
      * @return Response
      */
@@ -60,8 +60,8 @@ class ProductCardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  ProductCard  $productCard
+     * @param Request $request
+     * @param ProductCard $productCard
      *
      * @return Response
      */
@@ -73,7 +73,7 @@ class ProductCardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  ProductCard  $productCard
+     * @param ProductCard $productCard
      *
      * @return Response
      */
@@ -87,10 +87,15 @@ class ProductCardController extends Controller
      *
      * @param ProductsCardsService $productsCardsService
      * @param $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function complaint(ProductsCardsService $productsCardsService,$id)
+    public function complaint(Request $request, ProductsCardsService $productsCardsService, $id)
     {
-        return response()->json($productsCardsService->complaint($id), 200);
+
+        if ($productsCardsService->complaint($id)) {
+            $request->session()->flash('message', 'Жалоба принята');
+        }
+
+        return back();
     }
 }

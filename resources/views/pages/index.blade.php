@@ -1,6 +1,6 @@
-@extends('layout.base')
+@extends('layouts.app')
 
-@section('body')
+@section('content')
 
     <div class="container">
 

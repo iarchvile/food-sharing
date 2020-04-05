@@ -18,13 +18,13 @@
     <!-- Bootstrap Core CSS -->
     <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/plugins/datatables/media/css/dataTables.bootstrap4.css" rel="stylesheet">
-<!-- Custom CSS -->
+    <!-- Custom CSS -->
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/admin.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="/css/colors/megna.css" id="theme" rel="stylesheet">
 {{--    <link href="/css/custom.css" rel="stylesheet">--}}
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -34,34 +34,17 @@
 
 <body class="fix-sidebar fix-header card-no-border">
 <div id="app">
-@include('admin.components.preloader')
-<!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
+    @include('admin.components.preloader')
+
     <div id="main-wrapper">
-    @include('admin.components.header')
-    @include('admin.components.left-sidebar')
-    <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
+        @include('admin.components.header')
+        @include('admin.components.left-sidebar')
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
                 @yield('content')
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Page wrapper  -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
 
     @include('admin.components.scripts')
     @yield('scripts')

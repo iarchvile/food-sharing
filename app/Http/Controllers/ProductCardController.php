@@ -83,4 +83,16 @@ class ProductCardController extends Controller
     {
         //
     }
+
+    /**
+     * Жалоба на карточку продукта
+     *
+     * @param ProductsCardsService $productsCardsService
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function complaint(ProductsCardsService $productsCardsService,$id)
+    {
+        return response()->json($productsCardsService->complaint($id), 200);
+    }
 }

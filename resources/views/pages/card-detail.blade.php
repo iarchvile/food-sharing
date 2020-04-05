@@ -68,7 +68,9 @@
                             <dd><p>{{ $card->description }}</p></dd>
                         </dl>
 
-
+                        @if(!Route::is('my.show'))
+                            <button id="complaint" type="submit" class="btn btn-primary" card-id="{{$card->id}}">Пожаловаться</button>
+                        @endif
                     </article>
                 </aside>
             </div>

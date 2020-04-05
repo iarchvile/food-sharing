@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        {!! Form::open(['route' => ['my.store']]) !!}
+        {!! Form::open(['route' => ['my.store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
 
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -44,11 +44,11 @@
 
         <div>
 
-            @for($i=0;$i<1;$i++)
+            @for($i=0;$i<4;$i++)
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="photo-{{$i+1}}">Photo-{{$i+1}}</label>
-                        <input type="text" name="photos[]" class="form-control" id="photo-{{$i+1}}">
+                        <input type="file" name="photos[]" class="form-control" id="photo-{{$i+1}}">
                     </div>
                 </div>
             @endfor

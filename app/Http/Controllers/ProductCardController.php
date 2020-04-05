@@ -31,8 +31,6 @@ class ProductCardController extends Controller
     public function store(StoreProductCardRequest $request)
     {
         $data = $request->getFormData();
-        dd($data);
-
         $this->citiesService->createCity($data);
 
         return redirect(route('cms.cities.index'));

@@ -21,7 +21,7 @@
             </div>
         @endif
 
-        {!! Form::model($card, ['route' => ['my.update', $card->id], 'method' => 'put']) !!}
+        {!! Form::model($card, ['route' => ['my.update', $card->id], 'method' => 'put', 'enctype' => 'multipart/form-data']) !!}
 
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -52,12 +52,14 @@
         </div>
 
         <div>
-
-            @for($i=0;$i<=count($card->photos);$i++)
+            @for($i=0;$i<count($card->photos);$i++)
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="photo-{{$i+1}}">Photo-{{$i+1}}</label>
-                        <input type="text" name="photos[]" class="form-control" id="photo-{{$i+1}}" value="{{$card->photos[$i]??''}}">
+                        <label for="photo-{{$i+1}}">Photo-{{$i+1}}</label><br>
+                        <div style="margin-bottom: 10px">
+                            <img width="100px" height="100px" src="{{$card->photos[$i]}}">
+                        </div>
+                        <input type="file" name="photos[]" class="form-control" id="photo-{{$i+1}}" value="{{$card->photos[$i]??''}}">
                     </div>
                 </div>
             @endfor

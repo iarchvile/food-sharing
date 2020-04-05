@@ -33,7 +33,7 @@ class UpdateProductCardRequest extends FormRequest
             'description' => 'required|max:1000',
             'address' => 'required|max:255',
             'photos' => 'array|min:1|max:5',
-            'photos.*' => 'url',
+            'photos.*' => 'image',
         ];
     }
 
@@ -41,7 +41,7 @@ class UpdateProductCardRequest extends FormRequest
     {
         $data = parent::getFormData();
 
-        $data['photos'] = collect($data['photos'])->filter()->all();
+//        $data['photos'] = collect($data['photos'])->filter()->all();
 
         $geocode_service = resolve(GeocodeService::class);
 
@@ -53,11 +53,11 @@ class UpdateProductCardRequest extends FormRequest
         return $data;
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'photos' => collect($this->photos)->filter()->all(),
-        ]);
-    }
+//    protected function prepareForValidation()
+//    {
+//        $this->merge([
+//            'photos' => collect($this->photos)->filter()->all(),
+//        ]);
+//    }
 
 }

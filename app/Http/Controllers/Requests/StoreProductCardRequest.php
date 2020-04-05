@@ -31,7 +31,7 @@ class StoreProductCardRequest extends FormRequest
             'description' => 'required|max:1000',
             'address' => 'required|max:255',
             'photos' => 'array|min:1|max:5',
-            'photos.*' => 'url',
+            'photos.*' => 'image',
         ];
     }
 

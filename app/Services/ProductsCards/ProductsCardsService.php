@@ -6,6 +6,9 @@ namespace App\Services\ProductsCards;
 use App\Services\ProductsCards\Repositories\EloquentProductsCardsRepository;
 use App\Helpers\GetDistanceBetweenPoints;
 use App\Enums\ProductCardStatusEnum;
+use App\Services\ProductsCards\Handlers\StoreImageHandler;
+use App\Services\ProductsCards\Handlers\UpdateImageHandler;
+
 
 class ProductsCardsService
 {
@@ -22,12 +25,26 @@ class ProductsCardsService
      */
     private $getDistanceBetweenPointsHandler;
 
+    /**
+     * @var $storeImageHandler
+     */
+    private $storeImageHandler;
+
+    /**
+     * @var $updateImageHandler
+     */
+    private $updateImageHandler;
+
     public function __construct
     (
-        EloquentProductsCardsRepository $productsCardsRepository
+        EloquentProductsCardsRepository $productsCardsRepository,
+        StoreImageHandler $storeImageHandler,
+        UpdateImageHandler $updateImageHandler
     )
     {
         $this->productsCardsRepository = $productsCardsRepository;
+        $this->storeImageHandler = $storeImageHandler;
+        $this->updateImageHandler = $updateImageHandler;
     }
 
     public function getAllByCategoryId($categoryId)
@@ -121,20 +138,36 @@ class ProductsCardsService
      *
      * @param $card
      * @param $data
+     * @param $photos
      */
-    public function update($card, $data)
+    public function update($card, $data, $photos = null)
     {
+        if (!empty($photos)) {
+
+            $data['photos'] = $this->updateImageHandler->handler($card, $photos);
+        }
+
         $this->productsCardsRepository->update($card, $data);
     }
 
     /**
-     * @param $data
+     * Создать карточку продукта
      *
+     * @param $data
+     * @param $photos
      * @return int|mixed
      */
-    public function create($data)
+    public function create($data, $photos)
     {
-        return $this->productsCardsRepository->createFormArray($data);
+        $cardId = $this->productsCardsRepository->createFormArray($data);
+
+        if (!empty($photos)) {
+            $this->update($this->getById($cardId), [
+                'photos' => $this->storeImageHandler->handler($photos, $cardId)
+            ]);
+        }
+
+        return $cardId;
     }
 
     /**

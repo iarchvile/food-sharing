@@ -67,8 +67,7 @@ class UserController extends Controller
     public function store(StoreProductCardRequest $request, ProductsCardsService $cards_service)
     {
         $data = $request->getFormData();
-
-        $cardId = $cards_service->create($data);
+        $cardId = $cards_service->create($data, $request->file('photos'));
 
         return redirect(route('my.update', ['my' => $cardId]));
     }
@@ -122,7 +121,7 @@ class UserController extends Controller
 
         $data = $request->getFormData();
 
-        $cards_service->update($my, $data);
+        $cards_service->update($my, $data, $request->file('photos'));
 
         return redirect()->route('my.edit', ['my' => $my->id]);
     }

@@ -2,7 +2,7 @@
     <div class="col-lg-4 col-sm-6 mb-4">
         <div class="card h-100">
             <a href="{{route('card.show', ['card'=>$card['id']])}}">
-                <img src="{{$card['photos'][0]}}">
+                <img width="338px" height="255px" src="{{$card['photos'][0]}}">
             </a>
             <div class="card-body">
                 <p class="h5">

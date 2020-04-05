@@ -13,6 +13,7 @@ class FormRequest extends BaseFormRequest
         $data = $this->except([
             '_token',
             '_method',
+            'photos'
         ]);
 
         return $data;

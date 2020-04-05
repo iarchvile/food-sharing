@@ -68,8 +68,28 @@
 
         </div>
 
-        <button type="submit" class="btn btn-primary">update</button>
-        <a href="{{route('my.index')}}" class="btn btn-outline-info">cansel</a>
+
+        <div class="form-check">
+            {!! Form::radio('status_id', '2', ['class'=>'form-check-input', 'id'=>'status-2']) !!}
+            <label class="form-check-label" for="status-2">
+                Активна
+            </label>
+        </div>
+        <div class="form-check">
+            {!! Form::radio('status_id', '3', ['class'=>'form-check-input', 'id'=>'status-3']) !!}
+            <label class="form-check-label" for="status-3">
+                Завершена
+            </label>
+        </div>
+
+
+        <div class="mt-5">
+            <div class="btn-group" role="group">
+                <button type="submit" class="btn btn-primary">update</button>
+                <a href="{{route('my.index')}}" class="btn btn-outline-info">cansel</a>
+            </div>
+        </div>
+
         {!! Form::close() !!}
 
 

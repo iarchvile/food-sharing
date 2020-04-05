@@ -136,4 +136,15 @@ class ProductsCardsService
     {
         return $this->productsCardsRepository->createFormArray($data);
     }
+
+    /**
+     * Жалоба на карточку продукта
+     *
+     * @param $id
+     * @return int
+     */
+    public function complaint($id)
+    {
+       return $this->productsCardsRepository->complaint($id);
+    }
 }

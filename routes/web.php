@@ -19,6 +19,7 @@ Route::get('/', [ProductCategoryController::class, 'index'])->name('index');
 
 Route::resource('category', 'ProductCategoryController');
 Route::resource('card', 'ProductCardController');
+Route::put('complaint/{card}', 'ProductCardController@complaint')->name('card.complaint');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

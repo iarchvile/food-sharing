@@ -1,6 +1,5 @@
 <?php
 /** @var \App\Models\ProductCard $card */
-
 ?>
 
 @extends('layout.base')
@@ -67,8 +66,7 @@
                             <dt>Description</dt>
                             <dd><p>{{ $card->description }}</p></dd>
                         </dl>
-
-
+                        <button id="complaint" type="submit" class="btn btn-primary" card-id="{{$card->id}}">Пожаловаться</button>
                     </article>
                 </aside>
             </div>
@@ -78,4 +76,24 @@
     </div>
 
 
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function () {
+        $("#complaint").on("click", function () {
+            $.ajax({
+                url: "{{route('card.complaint', ['card' => $card->id])}}",
+                method: "put",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: {},
+                success: function (result) {
+
+                },
+                error: function (q, w, e) {
+                }
+            });
+        })
+    });
+</script>
 @endsection

@@ -81,4 +81,17 @@ class EloquentProductsCardsRepository
     {
         return (new ProductCard())->create($data)->id;
     }
+
+    /**
+     * Жалоба на карточку продукта
+     *
+     * @param $id
+     * @return int
+     */
+    public function complaint($id)
+    {
+       return ProductCard::where('id', $id)->update([
+           'is_сomplaint' => 1
+       ]);
+    }
 }

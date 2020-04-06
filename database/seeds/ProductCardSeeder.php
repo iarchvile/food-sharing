@@ -11,6 +11,6 @@ class ProductCardSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\ProductCard::class, 100)->create();
+        factory(\App\Models\ProductCard::class, 1000)->create();
     }
 }

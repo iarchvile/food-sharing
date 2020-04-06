@@ -3,6 +3,7 @@
 
 namespace App\Services\ProductsCards\Repositories;
 
+use App\Enums\ProductCardStatusEnum;
 use App\Models\ProductCard;
 use App\Models\ProductsCategory;
 use App\Services\ProductsCards\ProductsCardsService;
@@ -22,6 +23,7 @@ class EloquentProductsCardsRepository
     public function getAllByCategoryId($categoryId)
     {
         return ProductCard::whereProductsCategoryId($categoryId)
+            ->where('status_id', ProductCardStatusEnum::ACTIVE)
             ->paginate(ProductsCardsService::CATEGORY_PRODUCT_CARD_LIMIT);
     }
 
@@ -44,6 +46,7 @@ class EloquentProductsCardsRepository
      * Получить карточки определенного статуса
      *
      * @param $statusId
+     *
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
     public function getCardsByStatus($statusId)
@@ -64,7 +67,7 @@ class EloquentProductsCardsRepository
     /**
      * Редактирование карточки продуктов
      *
-     * @param ProductCard $card
+     * @param  ProductCard  $card
      * @param $data
      */
     public function update(ProductCard $card, $data)
@@ -86,12 +89,13 @@ class EloquentProductsCardsRepository
      * Жалоба на карточку продукта
      *
      * @param $id
+     *
      * @return int
      */
     public function complaint($id)
     {
-       return ProductCard::where('id', $id)->update([
-           'is_сomplaint' => 1
-       ]);
+        return ProductCard::where('id', $id)->update([
+            'is_сomplaint' => 1,
+        ]);
     }
 }
